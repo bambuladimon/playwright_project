@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-
+import 'dotenv/config';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -12,6 +12,11 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
+if (!process.env.AUTH_USER || !process.env.AUTH_PASSWORD) {
+  throw new Error('❌ Missing AUTH_USER or AUTH_PASSWORD in .env');
+}
+
+
 export default defineConfig({
   testDir: './e2e',
   /* Run tests in files in parallel */
@@ -27,11 +32,11 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'https://qauto.forstudy.space/',
+    baseURL: process.env.BASE_URL,
 
     httpCredentials: {
-        username: "guest",
-        password: "welcome2qauto",
+        username: process.env.AUTH_USER,
+        password: process.env.AUTH_PASSWORD,
       }
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */

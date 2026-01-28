@@ -6,16 +6,12 @@ export const test = base.extend({
     const context = await browser.newContext({
       storageState: 'storage/user.json',
     });
-
     const page = await context.newPage();
     const garagePage = new GaragePage(page);
 
-    await garagePage.open();
-    await garagePage.isOpened();
+    await page.goto('/panel/garage');
 
     await use(garagePage);
-
-    await context.close();
   },
 });
 

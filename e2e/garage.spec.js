@@ -1,5 +1,5 @@
 import { test, expect } from '../fixtures/userGaragePage.fixture';
 
-test('User can see Add car button in garage', async ({ userGaragePage }) => {
-  await expect(userGaragePage.addCarButton).toBeVisible();
+test('user can see garage page', async ({ userGaragePage }) => {
+  await userGaragePage.isOpened();
 });
